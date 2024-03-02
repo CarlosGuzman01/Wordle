@@ -1,6 +1,6 @@
 package com.example.wordleand102_project1
 
-import android.annotation.SuppressLint
+
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +10,6 @@ import android.text.style.ForegroundColorSpan
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toolbar
 import com.google.android.material.appbar.MaterialToolbar
 
 class MainActivity : AppCompatActivity() {
@@ -22,17 +21,9 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.title = "Wordle"
 
-        val str = SpannableString("Wordle")
-
-        str.setSpan(ForegroundColorSpan(Color.GREEN), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        //toolbar.title = str
 
         var attemptsCounter = 0
         val randomWord = FourLetterWordList.getRandomFourLetterWord().uppercase()
-
-
-
 
 
         val button = findViewById<Button>(R.id.theButton)
@@ -52,71 +43,58 @@ class MainActivity : AppCompatActivity() {
 
         val finalText = findViewById<TextView>(R.id.answer)
 
-        button.setOnClickListener{
+        button.setOnClickListener {
             var editTextValue = editText.text.toString()
 
-           var final = editTextValue.uppercase()
+            var final = editTextValue.uppercase()
 
 
             var str1 = SpannableString(final)
 
 
-
-            // var anotherValue = editTextValue.toString()
-
             attemptsCounter++
 
-            for(i in 0..3){
-                if(final[i] == randomWord[i]){
-                    str1.setSpan(ForegroundColorSpan(Color.GREEN), i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            for (i in 0..3) {
+                if (final[i] == randomWord[i]) {
+                    str1.setSpan(
+                        ForegroundColorSpan(Color.GREEN),
+                        i,
+                        i + 1,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
 
-                }else if (randomWord.contains(final[i])){
-                    str1.setSpan(ForegroundColorSpan(Color.RED), i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                } else if (randomWord.contains(final[i])) {
+                    str1.setSpan(
+                        ForegroundColorSpan(Color.RED), i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
 
-                }else{
+                } else {
 
 
                 }
             }
 
-            when(attemptsCounter){
-                1->{
-
+            when (attemptsCounter) {
+                1 -> {
                     attempt1.text = final
                     check1.text = str1
-
                 }
 
-                2->{
-
+                2 -> {
                     attempt2.text = final
                     check2.text = str1
-
                 }
 
-                3->{
-
+                3 -> {
                     attempt3.text = final
                     check3.text = str1
                     finalText.text = randomWord
-
                 }
             }
 
             editText.setText("")
 
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
